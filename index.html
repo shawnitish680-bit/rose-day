@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day 🌹</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #ff4d6d;
+    --secondary: #c9184a;
+    --dark: #590d22;
+    --glass: rgba(255,255,255,0.15);
+    --glass-border: rgba(255,255,255,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    color:white;
+    background:linear-gradient(-45deg,#590d22,#800f2f,#a4133c,#ff4d6d);
+    background-size:400% 400%;
+    animation:bg 15s ease infinite;
+}
+
+@keyframes bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.container{
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.step{
+    position:absolute;
+    width:90%;
+    max-width:400px;
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    border:1px solid var(--glass-border);
+    border-radius:24px;
+    padding:35px 20px;
+    text-align:center;
+    opacity:0;
+    transform:scale(.9);
+    transition:.6s;
+    display:none;
+}
+
+.step.active{
+    opacity:1;
+    transform:scale(1);
+    display:block;
+}
+
+h1{
+    font-family:'Dancing Script',cursive;
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+p{ font-size:1.1rem; line-height:1.6; }
+
+.photo-frame{
+    width:100%;
+    height:300px;
+    border-radius:16px;
+    overflow:hidden;
+    margin-bottom:20px;
+    border:4px solid rgba(255,255,255,.6);
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.btn{
+    margin-top:25px;
+    background:linear-gradient(45deg,var(--secondary),var(--primary));
+    border:none;
+    color:white;
+    padding:12px 30px;
+    border-radius:50px;
+    font-size:1.1rem;
+    cursor:pointer;
+}
+
+.big-rose{
+    font-size:7rem;
+    margin:15px 0;
+    animation:float 3s infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+.pink-star{color:#ff85c2}
+.pink-heart{color:#ff4d6d}
+
+.music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:var(--glass);
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+<source src="jugrafiya.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+
+<div class="container">
+
+<!-- STEP 0 -->
+<div class="step active" id="step0">
+<h1><span class="pink-star">✨</span> Bachaaa <span class="pink-heart">💖</span></h1>
+<p>I have a little surprise for you...</p>
+<button class="btn" onclick="nextStep(1)">Start ❤️</button>
+</div>
+
+<!-- STEP 1 -->
+<div class="step" id="step1">
+<h1>Do you know?</h1>
+<p id="t1"></p>
+<button class="btn" onclick="nextStep(2)">Tell me why 💕</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" id="step2">
+<div class="photo-frame">
+<img src="bachaaa.jpg" alt="My Bachaaa 💖">
+</div>
+<h1>Every Moment...</h1>
+<p>Spending time with you feels like a beautiful dream I never want to wake up from.</p>
+<button class="btn" onclick="nextStep(3)">Continue 🌹</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" id="step3">
+<h1>A Rose For You</h1>
+<div class="big-rose">🌹</div>
+<p>
+Bachaa aaj Rose Day h or e special rose tumhare liye,<br>
+avi tumhare pas hota toh real rose deta<br>
+but tum avi isse kaam chla lo ok bachaa<br>
+love you 😘<br><br>
+<strong>Can you accept my rose bachhaa?? 💖🌹</strong>
+</p>
+<button class="btn" onclick="nextStep(4)">Yes 💕</button>
+</div>
+
+<!-- STEP 4 -->
+<div class="step" id="step4">
+<h1>My Promise</h1>
+<p>
+Just like rose, me bhi tumko itna hi gehera pyar krta hu<br>
+or hamesha krta rahunga bachaa promise 🤞🤞
+</p>
+<button class="btn" onclick="nextStep(5)">Last ✨</button>
+</div>
+
+<!-- STEP 5 -->
+<div class="step" id="step5">
+<h1>Happy Rose Day 🌹</h1>
+<p>I love you Bachaaa 💖</p>
+<button class="btn" onclick="location.reload()">Replay 🔁</button>
+</div>
+
+</div>
+
+<script>
+let c=0;
+const bg=document.getElementById("bgMusic");
+
+function nextStep(n){
+document.getElementById("step"+c).classList.remove("active");
+c=n;
+document.getElementById("step"+c).classList.add("active");
+if(c===1) typeText();
+}
+
+function toggleMusic(){
+bg.paused ? bg.play() : bg.pause();
+}
+
+function typeText(){
+let t="Today is Rose Day, but for me every day is special because you are in it ❤️";
+let i=0, el=document.getElementById("t1");
+el.innerHTML="";
+let x=setInterval(()=>{
+el.innerHTML+=t[i];
+i++;
+if(i===t.length) clearInterval(x);
+},50);
+}
+</script>
+
+</body>
+</html>
